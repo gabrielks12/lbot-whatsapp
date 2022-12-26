@@ -135,7 +135,7 @@ module.exports = utilidades = async(client,message) => {
                     var usuarioTexto = body.slice(10).trim(), pesquisaResultados = await api.obterPesquisaWeb(usuarioTexto)
                     var pesquisaResposta = criarTexto(msgs_texto.utilidades.pesquisa.resposta_titulo, usuarioTexto)
                     for(let resultado of pesquisaResultados){
-                        pesquisaResposta += "═════════════════\n"
+                        pesquisaResposta += "\n"
                         pesquisaResposta += criarTexto(msgs_texto.utilidades.pesquisa.resposta_itens, resultado.titulo, resultado.link, resultado.descricao)
                     }
                     client.reply(chatId, pesquisaResposta, id)

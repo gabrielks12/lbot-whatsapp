@@ -304,7 +304,7 @@ module.exports = grupo = async(client,message) => {
                 let qtdInativos = usuariosInativos.length - 1
                 if(qtdInativos > 0){
                     let inativosResposta = criarTexto(msgs_texto.grupo.minativos.resposta_titulo, qtdMensagem, qtdInativos)
-                    inativosResposta += `═════════════════\n`
+                    inativosResposta += `\n`
                     for(let usuario of usuariosInativos){
                         if(usuario.id_usuario != botNumber+"@c.us") inativosResposta += criarTexto(msgs_texto.grupo.minativos.resposta_itens, usuario.id_usuario.replace(/@c.us/g, ''), usuario.msg)
                     }

@@ -68,7 +68,7 @@ module.exports = info = async(client, message, abrirMenu) => {
                 } else {
                     dadosResposta = criarTexto(msgs_texto.info.ajuda.resposta_comum, nomeUsuario, tipoUsuario)
                 }
-                dadosResposta += `═════════════════\n`
+                dadosResposta += `\n`
 
                 if(args.length == 1){
                     var menuResposta = menu.menuPrincipal()
