@@ -118,6 +118,9 @@ module.exports = figurinhas = async(client,message) => {
                 await client.reply(chatId, msgs_texto.figurinhas.tps.espera,id)
                 try{
                     var imagemBase64 = await sticker.textoParaFoto(usuarioTexto)
+
+
+                    console.log('TESTEBASE', imagemBase64)
                     client.sendImageAsSticker(chatId, imagemBase64, stickerMetadata).catch(err=>{
                         consoleErro(err.message, "STICKER-TPS")
                         client.reply(chatId, msgs_texto.figurinhas.sticker.erro_s,id)
