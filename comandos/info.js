@@ -73,12 +73,6 @@ module.exports = info = async(client, message, abrirMenu) => {
                 if(args.length == 1){
                     var menuResposta = menu.menuPrincipal()
                     await client.sendText(chatId, dadosResposta+menuResposta)
-                    await client.sendButtons(chatId, 'TESTE', [
-                        {
-                            id: "1",
-                            text: "PINTO"
-                        }
-                    ])
                 } else {
                     var usuarioOpcao = args[1]
                     var menuResposta = menu.menuPrincipal()
@@ -103,12 +97,6 @@ module.exports = info = async(client, message, abrirMenu) => {
                             menuResposta = menu.menuDiversao(isGroupMsg)
                             break
                         case "6":
-                            await client.sendButtons(chatId, 'TESTE', [
-                                {
-                                    id: "1",
-                                    text: "PINTO"
-                                }
-                            ])
                             menuResposta = menu.menuCreditos()
                             break
                     }
