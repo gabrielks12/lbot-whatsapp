@@ -98,6 +98,12 @@ module.exports = info = async(client, message, abrirMenu) => {
                             break
                         case "6":
                             menuResposta = menu.menuCreditos()
+                            await client.sendButtons(chatId, null, [
+                                {
+                                    id: "1",
+                                    "text": "Click"
+                                }
+                            ])
                             break
                     }
                     await client.sendText(chatId, dadosResposta+menuResposta)
