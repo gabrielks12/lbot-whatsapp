@@ -192,7 +192,7 @@ module.exports = diversao = async(client,message) => {
                 for (let i = 0 ; i < 5 ; i++){
                     var indexAleatorio = Math.floor(Math.random() * idParticipantesAtuais.length)
                     var membroSelecionado = idParticipantesAtuais[indexAleatorio]
-                    respostaTexto += criarTexto(msgs_texto.diversao.top5.resposta_itens, respostas[indexAleatorioRankPau], membroSelecionado.replace(/@c.us/g, ''))
+                    respostaTexto += criarTexto(msgs_texto.diversao.rankpau.resposta_itens, respostas[indexAleatorioRankPau], membroSelecionado.replace(/@c.us/g, ''))
                     idParticipantesAtuais.splice(idParticipantesAtuais.indexOf(membroSelecionado),1)                
                 }
                 await client.sendTextWithMentions(chatId, respostaTexto)
