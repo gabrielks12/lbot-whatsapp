@@ -181,24 +181,22 @@ module.exports = diversao = async(client,message) => {
                 await client.sendTextWithMentions(chatId, respostaTexto)
                 break
 
-                case '!rankpau':
-                    if (!isGroupMsg) return await client.reply(chatId, msgs_texto.permissao.grupo, id)
-                    if(args.length === 1) return await client.reply(chatId, erroComandoMsg(command), id)
-                    idParticipantesAtuais = await client.getGroupMembersId(groupId)
-                    if(idParticipantesAtuais.length < 5) return await client.reply(chatId,msgs_texto.diversao.top5.erro_membros, id)
-                    var respostaTexto = criarTexto(msgs_texto.diversao.rankpau.resposta_titulo)
-
-                    var respostas = msgs_texto.diversao.rankpau.respostas 
-                    var indexAleatorioRankPau = Math.floor(Math.random() * respostas.length)
-
-                    for (let i = 0 ; i < 5 ; i++){
-                        var indexAleatorio = Math.floor(Math.random() * idParticipantesAtuais.length)
-                        var membroSelecionado = idParticipantesAtuais[indexAleatorio]
-                        respostaTexto += criarTexto(msgs_texto.diversao.top5.resposta_itens, respostas[indexAleatorioRankPau], membroSelecionado.replace(/@c.us/g, ''))
-                        idParticipantesAtuais.splice(idParticipantesAtuais.indexOf(membroSelecionado),1)                
-                    }
-                    await client.sendTextWithMentions(chatId, respostaTexto)
-                    break
+            case '!rankpau':
+                if (!isGroupMsg) return await client.reply(chatId, msgs_texto.permissao.grupo, id)
+                if(args.length === 1) return await client.reply(chatId, erroComandoMsg(command), id)
+                idParticipantesAtuais = await client.getGroupMembersId(groupId)
+                if(idParticipantesAtuais.length < 5) return await client.reply(chatId,msgs_texto.diversao.top5.erro_membros, id)
+                var respostaTexto = criarTexto(msgs_texto.diversao.rankpau.resposta_titulo)
+                var respostas = msgs_texto.diversao.rankpau.respostas 
+                var indexAleatorioRankPau = Math.floor(Math.random() * respostas.length)
+                for (let i = 0 ; i < 5 ; i++){
+                    var indexAleatorio = Math.floor(Math.random() * idParticipantesAtuais.length)
+                    var membroSelecionado = idParticipantesAtuais[indexAleatorio]
+                    respostaTexto += criarTexto(msgs_texto.diversao.top5.resposta_itens, respostas[indexAleatorioRankPau], membroSelecionado.replace(/@c.us/g, ''))
+                    idParticipantesAtuais.splice(idParticipantesAtuais.indexOf(membroSelecionado),1)                
+                }
+                await client.sendTextWithMentions(chatId, respostaTexto)
+                break
     
 
             case '!par':
