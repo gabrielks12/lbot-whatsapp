@@ -183,7 +183,6 @@ module.exports = diversao = async(client,message) => {
 
             case '!rankpau':
                 if (!isGroupMsg) return await client.reply(chatId, msgs_texto.permissao.grupo, id)
-                if(args.length === 1) return await client.reply(chatId, erroComandoMsg(command), id)
                 idParticipantesAtuais = await client.getGroupMembersId(groupId)
                 if(idParticipantesAtuais.length < 5) return await client.reply(chatId,msgs_texto.diversao.top5.erro_membros, id)
                 var respostaTexto = criarTexto(msgs_texto.diversao.rankpau.resposta_titulo)
