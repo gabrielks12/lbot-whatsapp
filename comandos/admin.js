@@ -24,13 +24,13 @@ module.exports = admin = async(client,message) => {
         const blockNumber = await client.getBlockedIds()
         const groupId = isGroupMsg ? chat.groupMetadata.id : ''
         const ownerNumber = process.env.NUMERO_DONO.trim()
-        const isOwner = ownerNumber == sender.id.replace(/@c.us/g, '')
+        const ownerNumberTwo = process.env.DONO_TWO.trim()
+        let isOwner = false
 
-        const ownerNumberTwo = process.env.DONO_TWO.trim();
-        const isOwnerTwo = ownerNumberTwo == sender.id.replace(/@c.us/g, '')
+        if (ownerNumber == sender.id.replace(/@c.us/g, '')) isOwner = true
+        if (ownerNumberTwo == sender.id.replace(/@c.us/g, '')) isOwner = true
 
         if (!isOwner) return client.reply(chatId, msgs_texto.permissao.apenas_dono_bot, id)
-        //if (!isOwnerTwo) return client.reply(chatId, msgs_texto.permissao.apenas_dono_bot, id)
 
         switch(command){
             case "!admin":
