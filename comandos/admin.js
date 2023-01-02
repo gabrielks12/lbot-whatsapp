@@ -26,11 +26,11 @@ module.exports = admin = async(client,message) => {
         const ownerNumber = process.env.NUMERO_DONO.trim()
         const isOwner = ownerNumber == sender.id.replace(/@c.us/g, '')
 
-        const ownerNumber2 = process.env.NUMERO_DONO2.trim()
-        const isOwner2 = ownerNumber2 == sender.id.replace(/@c.us/g, '')
+        const ownerNumberTwo = process.env.DONO_TWO.trim()
+        const isOwnerTwo = ownerNumberTwo == sender.id.replace(/@c.us/g, '')
 
         if (!isOwner) return client.reply(chatId, msgs_texto.permissao.apenas_dono_bot, id)
-        if (!isOwner2) return client.reply(chatId, msgs_texto.permissao.apenas_dono_bot, id)
+        if (!isOwnerTwo) return client.reply(chatId, msgs_texto.permissao.apenas_dono_bot, id)
 
         switch(command){
             case "!admin":
