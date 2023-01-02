@@ -25,9 +25,11 @@ module.exports = admin = async(client,message) => {
         const groupId = isGroupMsg ? chat.groupMetadata.id : ''
         const ownerNumber = process.env.NUMERO_DONO.trim()
         const isOwner = ownerNumber == sender.id.replace(/@c.us/g, '')
-
+        console.log('isOwner', isOwner)
         const ownerNumberTwo = process.env.DONO_TWO.trim()
+        console.log('ownerNumberTwo', isOwner)
         const isOwnerTwo = ownerNumberTwo == sender.id.replace(/@c.us/g, '')
+        console.log('isOwnerTwo', isOwner)
 
         if (!isOwner) return client.reply(chatId, msgs_texto.permissao.apenas_dono_bot, id)
         if (!isOwnerTwo) return client.reply(chatId, msgs_texto.permissao.apenas_dono_bot, id)
