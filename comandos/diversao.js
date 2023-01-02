@@ -38,7 +38,8 @@ module.exports = diversao = async(client,message) => {
                 var indexAleatorio = Math.floor(Math.random() * respostas.length), idResposta = null, alvo = null
                 if(mentionedJidList.length == 1) idResposta = id, alvo = mentionedJidList[0].replace(/@c.us/g, '')
                 else idResposta = quotedMsgObj.id, alvo = quotedMsgObj.author.replace(/@c.us/g, '')
-                if((ownerNumber || ownerNumberTwo) == alvo) indexAleatorio = 0
+                if((ownerNumber) == alvo) indexAleatorio = 0
+                if((ownerNumberTwo) == alvo) indexAleatorio = 0
                 var respostaTexto = criarTexto(msgs_texto.diversao.viadometro.resposta,respostas[indexAleatorio])
                 await client.reply(chatId, respostaTexto, idResposta)
                 break
@@ -51,7 +52,8 @@ module.exports = diversao = async(client,message) => {
                 var indexAleatorio = Math.floor(Math.random() * respostas.length), idResposta = null, alvo = null
                 if(mentionedJidList.length == 1) idResposta = id, alvo = mentionedJidList[0].replace(/@c.us/g, '')
                 else idResposta = quotedMsgObj.id, alvo = quotedMsgObj.author.replace(/@c.us/g, '')
-                if((ownerNumber || ownerNumberTwo) == alvo) indexAleatorio = 0
+                if((ownerNumber) == alvo) indexAleatorio = 0
+                if((ownerNumberTwo) == alvo) indexAleatorio = 0
                 var respostaTexto = criarTexto(msgs_texto.diversao.bafometro.resposta, respostas[indexAleatorio])
                 await client.reply(chatId, respostaTexto, idResposta)
                 break
@@ -148,7 +150,8 @@ module.exports = diversao = async(client,message) => {
                 var indexAleatorio = Math.floor(Math.random() * respostas.length), idResposta = null, alvo = null
                 if (mentionedJidList.length == 1) idResposta = id, alvo = mentionedJidList[0].replace(/@c.us/g, '')
                 else idResposta = quotedMsgObj.id, alvo = quotedMsgObj.author.replace(/@c.us/g, '')
-                if((ownerNumber || ownerNumberTwo) == alvo) indexAleatorio = 0
+                if((ownerNumber) == alvo) indexAleatorio = 0
+                if((ownerNumberTwo) == alvo) indexAleatorio = 0
                 var respostaTexto = criarTexto(msgs_texto.diversao.gadometro.resposta, respostas[indexAleatorio])
                 await client.reply(chatId, respostaTexto, idResposta)       
                 break
