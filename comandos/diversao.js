@@ -25,7 +25,7 @@ module.exports = diversao = async(client,message) => {
         switch(command){
             case '!curiosidade':
                 try {
-                    const getBrain = await fs.readFileSync('../lib/Curiosidades/curiosidades.txt').toString().split('\n')
+                    const getBrain = await fs.readFileSync(path.resolve('lib/Curiosidades/curiosidades.txt')).toString().split('\n')
                     const thisKillCats = getBrain[Math.floor(Math.random() * getBrain.length)]
 					if (args[0].toLowerCase() == '-g') {
 						await exec(`cd lib/Curiosidades && bash -c 'grep -i "${args[1]}" curiosidades.txt | shuf -n 1'`, async (error, stdout, stderr) => {
