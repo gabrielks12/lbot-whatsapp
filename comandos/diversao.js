@@ -3,6 +3,7 @@ const msgs_texto = require('../lib/msgs')
 const {criarTexto, primeiraLetraMaiuscula, erroComandoMsg, removerNegritoComando} = require("../lib/util")
 const path = require("path")
 const api = require('../lib/api')
+const { exec } = require('child_process')
 
 module.exports = diversao = async(client,message) => {
     try {
@@ -21,6 +22,21 @@ module.exports = diversao = async(client,message) => {
         const groupOwner = isGroupMsg ? chat.groupMetadata.owner : ''
 
         switch(command){
+            case '!curiosidade':
+                try {
+                    const getBrain = await fs.readFileSync('../lib/Curiosidades/curiosidades.txt').toString().split('\n')
+                    const thisKillCats = getBrain[Math.floor(Math.random() * getBrain.length)]
+					if (args[0].toLowerCase() == '-g') {
+						await exec(`cd lib/Curiosidades && bash -c 'grep -i "${args[1]}" curiosidades.txt | shuf -n 1'`, async (error, stdout, stderr) => {
+							if (error || stderr || stdout == null || stdout == '') {
+								await client.reply(chatId, thisKillCats, id)
+							} else return await client.reply(chatId, stdout, id)
+						})
+					} else return await client.reply(chatId, thisKillCats, id)
+				} catch (err) { 
+					await client.reply(chatId, err.message, id)
+				}
+				break
             case '!detector' :
                 if (!isGroupMsg) return await client.reply(chatId, msgs_texto.permissao.grupo, id)
                 if(!quotedMsg) return await client.reply(chatId, erroComandoMsg(command) , id)
@@ -106,12 +122,12 @@ module.exports = diversao = async(client,message) => {
             case "!massacote":
             case '!mascote':
                 var mascoteFotoURL = "https://i.imgur.com/mVwa7q4.png"
-                await client.sendFileFromUrl(chatId, mascoteFotoURL, 'mascote.jpeg', 'Whatsapp Jr.', id)
+                await client.sendFilechatIdUrl(chatId, mascoteFotoURL, 'mascote.jpeg', 'Whatsapp Jr.', id)
                 break 
 
             case '!malacos':
                 const malacosFotoURL = "https://i.imgur.com/7bcn2TK.jpg"
-                await client.sendFileFromUrl(chatId, malacosFotoURL, 'malacos.jpg', 'Somos o problema', id)
+                await client.sendFilechatIdUrl(chatId, malacosFotoURL, 'malacos.jpg', 'Somos o problema', id)
                 break
 
             case '!roletarussa':
