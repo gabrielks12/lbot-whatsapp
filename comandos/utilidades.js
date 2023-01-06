@@ -23,7 +23,9 @@ module.exports = utilidades = async(client,message) => {
                 if (!isGroupMsg) return await client.reply(from, msgs_texto.permissao.grupo, id)
 
                 try {
+                    console.log(args)
                     const dados = await sinesp.search(`${args[1]}`)
+                    console.log('dados', dados)
 					await client.reply(from, `Placa: ${dados.placa}\n\nSituação: ${dados.situacao}\n\nModelo: ${dados.modelo}\n\nMarca: ${dados.marca}\n\nCor: ${dados.cor}\n\nAno: ${dados.ano}\n\nAno do modelo: ${dados.anoModelo}\n\nEstado: ${dados.uf}\n\nMunicipio: ${dados.municipio}\n\nChassi: ${dados.chassi}.`, id)
 				
                 } catch (error) {
