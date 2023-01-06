@@ -10,7 +10,7 @@ const sinesp = require('sinesp-api')
 
 module.exports = utilidades = async(client,message) => {
     try{
-        const { type, id, from, chatId, caption, isMedia, mimetype, quotedMsg, quotedMsgObj, body} = message
+        const { type, id, from, chatId, caption, isGroupMsg, isMedia, mimetype, quotedMsg, quotedMsgObj, body} = message
         const commands = caption || body || ''
         var command = commands.toLowerCase().split(' ')[0] || ''
         command = removerNegritoComando(command)
