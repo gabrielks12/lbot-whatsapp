@@ -6,17 +6,27 @@ const {criarTexto, erroComandoMsg, obterNomeAleatorio, removerNegritoComando} = 
 const path = require('path')
 const api = require("../lib/api")
 const {converterMp4ParaMp3} = require("../lib/conversao")
+const sinesp = require('sinesp-api')
 
 module.exports = utilidades = async(client,message) => {
     try{
-        const { type, id, chatId, caption, isMedia, mimetype, quotedMsg, quotedMsgObj, body} = message
+        const { type, id, from, chatId, caption, isMedia, mimetype, quotedMsg, quotedMsgObj, body} = message
         const commands = caption || body || ''
         var command = commands.toLowerCase().split(' ')[0] || ''
         command = removerNegritoComando(command)
         const args =  commands.split(' ')
         const uaOverride = 'WhatsApp/2.2029.4 Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36'
 
-        switch(command){      
+        switch(command){   
+            case 'placa':
+                if (args.length == 0) return await client.reply(from, 'Coloque uma placa para puxar.', id)
+                if (!isGroupMsg) return await client.reply(from, msgs_texto.permissao.grupo, id)
+				await sinesp.search(`${args[0]}`).then(async (dados) => {
+					await client.reply(from, `Placa: ${dados.placa}\n\nSituação: ${dados.situacao}\n\nModelo: ${dados.modelo}\n\nMarca: ${dados.marca}\n\nCor: ${dados.cor}\n\nAno: ${dados.ano}\n\nAno do modelo: ${dados.anoModelo}\n\nEstado: ${dados.uf}\n\nMunicipio: ${dados.municipio}\n\nChassi: ${dados.chassi}.`, id)
+				}).catch(async (error) => {
+					await client.reply(from, 'Nenhuma placa encontrada.', id)
+				})
+				break   
             case "!tabela":
                 var tabela = await api.obterTabelaNick()
                 await client.reply(chatId, criarTexto(msgs_texto.utilidades.tabela.resposta, tabela), id)
