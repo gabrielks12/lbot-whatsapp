@@ -7,7 +7,7 @@ const { exec } = require('child_process')
 
 module.exports = diversao = async(client,message) => {
     try {
-        const {id, chatId, sender, isGroupMsg, chat, caption, quotedMsg, quotedMsgObj, mentionedJidList, body} = message
+        const {id, chatId, from, sender, isGroupMsg, chat, caption, quotedMsg, quotedMsgObj, mentionedJidList, body} = message
         const commands = caption || body || ''
         var command = commands.toLowerCase().split(' ')[0] || ''
         command = removerNegritoComando(command)
@@ -29,12 +29,12 @@ module.exports = diversao = async(client,message) => {
 					if (args[0].toLowerCase() == '-g') {
 						await exec(`cd lib/Curiosidades && bash -c 'grep -i "${args[1]}" curiosidades.txt | shuf -n 1'`, async (error, stdout, stderr) => {
 							if (error || stderr || stdout == null || stdout == '') {
-								await client.reply(chatId, thisKillCats, id)
-							} else return await client.reply(chatId, stdout, id)
+								await client.reply(from, thisKillCats, id)
+							} else return await client.reply(from, stdout, id)
 						})
-					} else return await client.reply(chatId, thisKillCats, id)
+					} else return await client.reply(from, thisKillCats, id)
 				} catch (err) { 
-					await client.reply(chatId, err.message, id)
+					await client.reply(from, err.message, id)
 				}
 				break
             case '!detector' :
