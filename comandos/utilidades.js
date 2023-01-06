@@ -21,11 +21,14 @@ module.exports = utilidades = async(client,message) => {
             case 'placa':
                 if (args.length == 0) return await client.reply(from, 'Coloque uma placa para puxar.', id)
                 if (!isGroupMsg) return await client.reply(from, msgs_texto.permissao.grupo, id)
-				await sinesp.search(`${args[0]}`).then(async (dados) => {
+
+                try {
+                    const dados = await sinesp.search(`${args[1]}`)
 					await client.reply(from, `Placa: ${dados.placa}\n\nSituação: ${dados.situacao}\n\nModelo: ${dados.modelo}\n\nMarca: ${dados.marca}\n\nCor: ${dados.cor}\n\nAno: ${dados.ano}\n\nAno do modelo: ${dados.anoModelo}\n\nEstado: ${dados.uf}\n\nMunicipio: ${dados.municipio}\n\nChassi: ${dados.chassi}.`, id)
-				}).catch(async (error) => {
-					await client.reply(from, 'Nenhuma placa encontrada.', id)
-				})
+				
+                } catch (error) {
+                    await client.reply(from, 'Nenhuma placa encontrada.', id)
+                }
 				break   
             case "!tabela":
                 var tabela = await api.obterTabelaNick()
