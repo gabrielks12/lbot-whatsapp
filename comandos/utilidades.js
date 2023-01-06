@@ -1,12 +1,12 @@
 //REQUERINDO MÓDULOS
 const { decryptMedia } = require('@open-wa/wa-decrypt')
 const fs = require('fs-extra')
+const sinesp = require('sinesp-api')
+const path = require('path')
 const msgs_texto = require('../lib/msgs')
 const {criarTexto, erroComandoMsg, obterNomeAleatorio, removerNegritoComando} = require("../lib/util")
-const path = require('path')
 const api = require("../lib/api")
 const {converterMp4ParaMp3} = require("../lib/conversao")
-const sinesp = require('sinesp-api')
 
 module.exports = utilidades = async(client,message) => {
     try{
@@ -23,13 +23,11 @@ module.exports = utilidades = async(client,message) => {
                 if (!isGroupMsg) return await client.reply(from, msgs_texto.permissao.grupo, id)
 
                 try {
-                    console.log(args)
                     const dados = await sinesp.search(`${args[1]}`)
-                    console.log('dados', dados)
 					await client.reply(from, `Placa: ${dados.placa}\n\nSituação: ${dados.situacao}\n\nModelo: ${dados.modelo}\n\nMarca: ${dados.marca}\n\nCor: ${dados.cor}\n\nAno: ${dados.ano}\n\nAno do modelo: ${dados.anoModelo}\n\nEstado: ${dados.uf}\n\nMunicipio: ${dados.municipio}\n\nChassi: ${dados.chassi}.`, id)
 				
                 } catch (error) {
-                    await client.reply(from, 'Nenhuma placa encontrada.', id)
+                    await client.reply(from, `Nenhuma placa encontrada. - ${error.message}`, id)
                 }
 				break   
             case "!tabela":
