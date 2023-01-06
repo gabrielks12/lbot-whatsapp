@@ -4,6 +4,7 @@ const {criarTexto, primeiraLetraMaiuscula, erroComandoMsg, removerNegritoComando
 const path = require("path")
 const api = require('../lib/api')
 const { exec } = require('child_process')
+const fs = require('fs-extra')
 
 module.exports = diversao = async(client,message) => {
     try {
