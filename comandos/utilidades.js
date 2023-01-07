@@ -20,17 +20,16 @@ module.exports = utilidades = async(client,message) => {
         const uaOverride = 'WhatsApp/2.2029.4 Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36'
 
         switch(command){
-            case 'qr':
+            case '!qr':
                 if(args.length === 1) return client.reply(chatId, 'Adicione um texto/link para gerar seu QR-Code!', id)
                 try{
-                    const usuarioTextoQr = body.slice(7).trim()
-                    await client.sendFileFromUrl(from, `http://api.qrserver.com/v1/create-qr-code/?data=${usuarioTextoQr}`, '', `Prontinho, fiz o que você pediu, não esqueça de me pagar!`, id)
+                    await client.sendFileFromUrl(from, `http://api.qrserver.com/v1/create-qr-code/?data=${body.slice(4)}`, '', `Prontinho, fiz o que você pediu, não esqueça de me pagar!`, id)
                 } catch(err){
                     await client.reply(chatId, err.message, id)
                 }
                 break
-
-			case 'lerqr':
+                
+			case '!lerqr':
                 const isQuotedImage = quotedMsg && quotedMsg.type === 'image'
                 const isImage = type === 'image'
 
