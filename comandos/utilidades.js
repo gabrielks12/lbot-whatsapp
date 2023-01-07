@@ -7,6 +7,8 @@ const msgs_texto = require('../lib/msgs')
 const {criarTexto, erroComandoMsg, obterNomeAleatorio, removerNegritoComando} = require("../lib/util")
 const api = require("../lib/api")
 const {converterMp4ParaMp3} = require("../lib/conversao")
+const axios = require('axios')
+const { imagemUpload } = require('../lib/util')
 
 module.exports = utilidades = async(client,message) => {
     try{
@@ -17,7 +19,28 @@ module.exports = utilidades = async(client,message) => {
         const args =  commands.split(' ')
         const uaOverride = 'WhatsApp/2.2029.4 Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36'
 
-        switch(command){   
+        switch(command){
+            case 'qr':
+				if(args.length === 1) return client.reply(chatId, 'Adicione um texto/link para gerar seu QR-Code!', id)
+				await client.sendFileFromUrl(from, `http://api.qrserver.com/v1/create-qr-code/?data=${body.slice(4)}`, '', `Prontinho, fiz o que você pediu, não esqueça de me pagar!`, id)
+				break
+
+			case 'lerqr':
+                const isQuotedImage = quotedMsg && quotedMsg.type === 'image'
+                const isImage = type === 'image'
+
+				if (isImage || isQuotedImage) {
+					const qrCode = isQuotedImage ? quotedMsg : message
+					const downQr = await decryptMedia(qrCode, uaOverride)
+                    const usuarioImgBase64 = `data:${dadosMensagem.mimetype};base64,${downQr.toString('base64')}`
+                    const linkImagem = await imagemUpload(usuarioImgBase64)
+					const getQrText = await axios.get(`http://api.qrserver.com/v1/read-qr-code/?fileurl=${linkImagem}`)
+					const theQRText = getQrText.data[0].symbol[0].data
+					if (theQRText == null) return await client.reply(from, 'Não é um QR.\n\nOu erro', id)
+					await client.reply(from, `→ ${theQRText}`, id).catch(async () => { await client.reply(from, 'Falha na leitura da imagem', id) })
+				} else return await client.reply(from, 'Envie uma IMAGEM e que seja um QR-Code!', id)
+				break
+
             case "!tabela":
                 var tabela = await api.obterTabelaNick()
                 await client.reply(chatId, criarTexto(msgs_texto.utilidades.tabela.resposta, tabela), id)
