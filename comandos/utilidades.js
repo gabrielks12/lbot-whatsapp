@@ -36,7 +36,7 @@ module.exports = utilidades = async(client,message) => {
 				if (isImage || isQuotedImage) {
 					const qrCode = isQuotedImage ? quotedMsg : message
 					const downQr = await decryptMedia(qrCode, uaOverride)
-                    const usuarioImgBase64 = `data:${dadosMensagem.mimetype};base64,${downQr.toString('base64')}`
+                    const usuarioImgBase64 = `data:${quotedMsg.mimetype};base64,${downQr.toString('base64')}`
                     const linkImagem = await imagemUpload(usuarioImgBase64)
 					const getQrText = await axios.get(`http://api.qrserver.com/v1/read-qr-code/?fileurl=${linkImagem}`)
 					const theQRText = getQrText.data[0].symbol[0].data
