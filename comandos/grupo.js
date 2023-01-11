@@ -681,7 +681,8 @@ module.exports = grupo = async(client,message) => {
                 if (!isGroupAdmins) return client.reply(chatId, msgs_texto.permissao.apenas_admin, id)
                 console.log('teste3')
                 var estadoNovo = !chat.groupMetadata.announce
-                client.setGroupToAdminsOnly(groupId, estadoNovo)
+                await client.setGroupToAdminsOnly(groupId, estadoNovo)
+                console.log('teste4')
                 break 
         }
     } catch(err){
