@@ -1,7 +1,6 @@
 //REQUERINDO MÓDULOS
 const { decryptMedia } = require('@open-wa/wa-decrypt')
 const fs = require('fs-extra')
-const sinesp = require('sinesp-api')
 const path = require('path')
 const msgs_texto = require('../lib/msgs')
 const {criarTexto, erroComandoMsg, obterNomeAleatorio, removerNegritoComando} = require("../lib/util")
