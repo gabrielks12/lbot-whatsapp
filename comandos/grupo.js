@@ -508,10 +508,15 @@ module.exports = grupo = async(client,message) => {
                 break
 
             case '!link':
+                console.log('teste1', isBotGroupAdmins)
                 if (!isBotGroupAdmins) return client.reply(chatId,msgs_texto.permissao.bot_admin, id)
+                console.log('teste2', isGroupAdmins)
                 if (!isGroupAdmins) return client.reply(chatId, msgs_texto.permissao.apenas_admin , id)
+                console.log('teste3', groupId)
                 var linkConvite = await client.getGroupInviteLink(groupId)
+                console.log('teste4', linkConvite)
                 var {title} = await client.getGroupInfo(groupId);
+                console.log('teste5', title)
                 await client.sendLinkWithAutoPreview(chatId, linkConvite, criarTexto(msgs_texto.grupo.link.resposta, title))
                 break
 
@@ -679,7 +684,7 @@ module.exports = grupo = async(client,message) => {
                 if (!isBotGroupAdmins) return client.reply(chatId, msgs_texto.permissao.bot_admin, id)
                 console.log('teste2', isGroupAdmins)
                 if (!isGroupAdmins) return client.reply(chatId, msgs_texto.permissao.apenas_admin, id)
-                console.log('teste3', estadoNovo, chat.groupMetadata.id)
+                console.log('teste3', chat.groupMetadata.id)
                 var estadoNovo = !chat.groupMetadata.announce
                 await client.setGroupToAdminsOnly(groupId, estadoNovo)
                 console.log('teste4')
