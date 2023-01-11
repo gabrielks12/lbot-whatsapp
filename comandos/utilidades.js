@@ -22,7 +22,7 @@ module.exports = utilidades = async(client,message) => {
             case '!qr':
                 if(args.length === 1) return client.reply(chatId, 'Adicione um texto/link para gerar seu QR-Code!', id)
                 try{
-                    await client.sendFileFromUrl(chatId, `http://api.qrserver.com/v1/create-qr-code/?data=${body.slice(4)}.png`, '', `Prontinho, fiz o que você pediu, não esqueça de me pagar!`, id)
+                    await client.sendFileFromUrl(chatId, `http://api.qrserver.com/v1/create-qr-code/?data=${body.slice(4)}`, 'qr.png', `Prontinho, fiz o que você pediu, não esqueça de me pagar!`, id)
                 } catch(err){
                     await client.reply(chatId, err.message, id)
                 }
